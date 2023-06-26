@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: aqua;
+  color: cornflowerblue;
+}
+
+main {
+  width: 1000px;
+  margin: 3rem auto;
+}
+
+h1 {
+  font-size: 5rem;
+  z-index: 1;
+  color: cadetblue;
+  line-height: 0.8;
+  margin: 3rem 0 1rem;
+}
+
+section {
+  background-color: lightskyblue;
+  padding: 2rem;
+  display: grid;
+}
+
+section img {
+  border: 5px solid transparent;
+  width: 300px;
+  max-height: 20rem;
+}
+
+section img:hover {
+  border: 5px solid cadetblue;
+  cursor: pointer;
+}
