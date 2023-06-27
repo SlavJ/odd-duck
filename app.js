@@ -86,6 +86,7 @@ function handleDuckClick(event) {
       duckContainer.className = "no-voting";
       resultsButton.addEventListener("click", renderResults);
       resultsButton.className = "clicks-allowed";
+      alert("click on results button to view results");
     } else {
       renderDucks();
     }
@@ -98,6 +99,7 @@ function renderResults() {
     let li = document.createElement("li");
     li.textContent = `${allDucks[i].name} had ${allDucks[i].views} views and was clicked ${allDucks[i].clicks} times.`;
     ul.appendChild(li);
+    resultsButton.removeEventListener("click", renderResults);
   }
 }
 

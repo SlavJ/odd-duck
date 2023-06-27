@@ -13,17 +13,19 @@ main {
 }
 
 h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   z-index: 1;
   color: cadetblue;
   line-height: 0.8;
   margin: 3rem 0 1rem;
+  background-color: black;
+  max-width: fit-content;
+  padding: 1rem;
 }
 
 section {
   background-color: lightskyblue;
   padding: 2rem;
-  display: grid;
 }
 
 section img {
@@ -35,4 +37,22 @@ section img {
 section img:hover {
   border: 5px solid cadetblue;
   cursor: pointer;
+}
+
+.resultsbutton {
+  max-width: fit-content;
+  padding: 1rem;
+  border: 5px solid black;
+  cursor: pointer;
+  background-color: blue;
+  color: aqua;
+}
+
+resultsButton {
+  max-width: fit-content;
+  padding: 1rem;
+  border: 5px solid black;
+  cursor: pointer;
+  background-color: blue;
+  color: aqua;
 }
