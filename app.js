@@ -10,26 +10,6 @@ const image3 = document.querySelector("section img:nth-child(3)");
 
 let allDucks = [];
 
-const bag = new Duck("Bag", "archive/Archive/bag.jpg");
-const banana = new Duck("Banana", "archive/Archive/banana.jpg");
-const bathroom = new Duck("Bathroom", "archive/Archive/bathroom.jpg");
-const boots = new Duck("Boots", "archive/Archive/boots.jpg");
-const breakfast = new Duck("Breakfast", "archive/Archive/breakfast.jpg");
-const bubblegum = new Duck("Bubblegum", "archive/Archive/bubblegum.jpg");
-const chair = new Duck("Chair", "archive/Archive/chair.jpg");
-const cthulhu = new Duck("Cthulhu", "archive/Archive/cthulhu.jpg");
-const dogduck = new Duck("Dog-duck", "archive/Archive/dog-duck.jpg");
-const dragon = new Duck("Dragon", "archive/Archive/dragon.jpg");
-const pen = new Duck("Pen", "archive/Archive/pen.jpg");
-const petsweep = new Duck("Pet-sweep", "archive/Archive/pet-sweep.jpg");
-const scissors = new Duck("Scissors", "archive/Archive/scissors.jpg");
-const shark = new Duck("Shark", "archive/Archive/shark.jpg");
-const sweep = new Duck("Sweep", "archive/Archive/sweep.png");
-const tauntaun = new Duck("Tauntaun", "archive/Archive/tauntaun.jpg");
-const unicorn = new Duck("Unicorn", "archive/Archive/unicorn.jpg");
-const watercan = new Duck("Water-can", "archive/Archive/water-can.jpg");
-const wineglass = new Duck("Wine-glass", "archive/Archive/wine-glass.jpg");
-
 let clicks = 0;
 const maxClicksAllowed = 5;
 
@@ -85,7 +65,7 @@ function handleDuckClick(event) {
       duckContainer.removeEventListener("click", handleDuckClick);
       duckContainer.className = "no-voting";
       resultsButton.addEventListener("click", renderResults);
-      resultsButton.className = "clicks-allowed";
+      resultsButton.addEventListener("click", renderChart);
       alert("click on results button to view results");
     } else {
       renderDucks();
@@ -103,6 +83,80 @@ function renderResults() {
   }
 }
 
-renderDucks();
-
 duckContainer.addEventListener("click", handleDuckClick);
+
+function renderChart() {
+  const duckNames = [];
+  const duckViews = [];
+  const duckClicks = [];
+
+  for (let i = 0; i < allDucks.length; i++) {
+    duckNames.push(allDucks[i].name);
+    duckViews.push(allDucks[i].views);
+    duckClicks.push(allDucks[i].clicks);
+  }
+
+  const data = {
+    labels: duckNames,
+    datasets: [
+      {
+        label: "clicks",
+        data: duckClicks,
+        backgroundColor: ["#00BEFF"],
+        borderColor: ["#0C30F3"],
+        borderWidth: 1,
+      },
+      {
+        label: "views",
+        data: duckViews,
+        backgroundColor: ["#0C30F3"],
+        borderColor: ["#00BEFF"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const config = {
+    type: "bar",
+    data: data,
+  };
+
+  const duckChart = document.getElementById("chart");
+  const myChart = new Chart(duckChart, config);
+  setLocalStorage();
+}
+
+function setLocalStorage() {
+  localStorage.setItem("ducks", JSON.stringify(allDucks));
+}
+
+function checkLocalStorage() {
+  const localDucks = JSON.parse(localStorage.getItem("ducks"));
+  console.log(localDucks);
+  if (localDucks) {
+    allDucks = localDucks;
+  } else {
+    const bag = new Duck("Bag", "archive/Archive/bag.jpg");
+    const banana = new Duck("Banana", "archive/Archive/banana.jpg");
+    const bathroom = new Duck("Bathroom", "archive/Archive/bathroom.jpg");
+    const boots = new Duck("Boots", "archive/Archive/boots.jpg");
+    const breakfast = new Duck("Breakfast", "archive/Archive/breakfast.jpg");
+    const bubblegum = new Duck("Bubblegum", "archive/Archive/bubblegum.jpg");
+    const chair = new Duck("Chair", "archive/Archive/chair.jpg");
+    const cthulhu = new Duck("Cthulhu", "archive/Archive/cthulhu.jpg");
+    const dogduck = new Duck("Dog-duck", "archive/Archive/dog-duck.jpg");
+    const dragon = new Duck("Dragon", "archive/Archive/dragon.jpg");
+    const pen = new Duck("Pen", "archive/Archive/pen.jpg");
+    const petsweep = new Duck("Pet-sweep", "archive/Archive/pet-sweep.jpg");
+    const scissors = new Duck("Scissors", "archive/Archive/scissors.jpg");
+    const shark = new Duck("Shark", "archive/Archive/shark.jpg");
+    const sweep = new Duck("Sweep", "archive/Archive/sweep.png");
+    const tauntaun = new Duck("Tauntaun", "archive/Archive/tauntaun.jpg");
+    const unicorn = new Duck("Unicorn", "archive/Archive/unicorn.jpg");
+    const watercan = new Duck("Water-can", "archive/Archive/water-can.jpg");
+    const wineglass = new Duck("Wine-glass", "archive/Archive/wine-glass.jpg");
+  }
+}
+
+checkLocalStorage();
+renderDucks();
